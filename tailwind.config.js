@@ -47,6 +47,9 @@ export default {
         center: true,
         padding: "1rem",
       },
+      boxShadow: {
+        "input-focus": "0 12px 24px -8px rgb(var(--color-primary-300))"
+      },
       fontFamily: {
         sans: ['var(--font-vazir)' , ...fontFamily.sans ]
       },
