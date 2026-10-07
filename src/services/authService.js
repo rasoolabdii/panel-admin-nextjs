@@ -11,3 +11,7 @@ export async function checkOTPApi(data) {
 export async function completeProfileApi(data) {
     return http.post("/user/complete-profile" , data).then(({ data }) => data.data);
 }
+
+export async function getUserProfileApi() {
+    return http.get("/user/profile").then(({ data }) => data.data);
+}
