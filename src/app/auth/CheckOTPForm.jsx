@@ -1,5 +1,5 @@
 import Loading from "@/ui/Loading";
-import { BiArrowToLeft } from "react-icons/bi";
+import { HiArrowNarrowRight } from "react-icons/hi";
 import OTPInput from "react-otp-input";
 
 function CheckOTPForm({ onSubmit , otp , setOtp , onBack , time , onResendOTP , otpResponse , isLoading}) {
@@ -7,8 +7,8 @@ function CheckOTPForm({ onSubmit , otp , setOtp , onBack , time , onResendOTP , 
         <div>
             <form className="space-y-8" onSubmit={onSubmit}>
                 <button onClick={onBack} className="flex items-center gap-x-2 text-primary-900 mb-4">
+                    <HiArrowNarrowRight className="w-6 h-6" />
                     <span>بازگشت</span>
-                    <BiArrowToLeft className="w-6 h-6" />
                 </button>
 
                 {otpResponse && (

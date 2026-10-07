@@ -37,8 +37,14 @@ function AuthPage() {
     const checkOTPHandler = async (e) => {
         e.preventDefault();
         try{
-            await checkOTP({phoneNumber , otp});
-            router.push("/profile")
+            const { message , user } = await checkOTP({phoneNumber , otp});
+            toast.success(message);
+            if(user.isActive) {
+                router.push("/");
+            }
+            else {
+                router.push("/complete-profile");
+            }
         }
         catch(error) {
             toast.error(error?.response?.data?.message);
@@ -83,7 +89,7 @@ function AuthPage() {
 
     return (
         <div className="flex justify-center">
-            <div className="w-full sm:max-w-sm">
+            <div className="w-full sm:max-w-sm md:max-w-md">
                 { renderSteps() }
             </div>
         </div>

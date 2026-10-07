@@ -7,3 +7,7 @@ export async function sendOTPApi(phoneNumber) {
 export async function checkOTPApi(data) {
     return http.post("/user/check-otp" , data).then(({ data }) => data.data);
 }
+
+export async function completeProfileApi(data) {
+    return http.post("/user/complete-profile" , data).then(({ data }) => data.data);
+}
