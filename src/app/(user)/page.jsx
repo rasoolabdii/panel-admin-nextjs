@@ -1,7 +1,7 @@
 function Page() {
     return (
         <div className="">
-            page root
+            page user
         </div>
     )
 };
