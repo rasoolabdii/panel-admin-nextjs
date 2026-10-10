@@ -5,12 +5,12 @@ function SideBar() {
         <div>
             <ul className="flex flex-col space-y-8">
                 <li>
-                    <Link href="/">
+                    <Link href="/profile">
                         صفحه اصلی
                     </Link>
                 </li>
                 <li>
-                    <Link href="/me">
+                    <Link href="/profile/me">
                         اطلاعات کاربری
                     </Link>
                 </li>

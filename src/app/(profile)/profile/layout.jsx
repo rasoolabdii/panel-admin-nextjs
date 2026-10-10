@@ -19,9 +19,9 @@ function LayoutProfile({ children }) {
                         <div className="col-span-1 bg-gray-100 overflow-y-auto p-4">
                             <SideBar />
                         </div>
-                    </div>
-                    <div className="col-span-3 overflow-y-auto p-4">
-                        {children}
+                        <div className="col-span-3 overflow-y-auto p-4">
+                            {children}
+                        </div>
                     </div>
                 </Providers>
             </body>
