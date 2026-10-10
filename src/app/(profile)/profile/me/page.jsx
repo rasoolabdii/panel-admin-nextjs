@@ -41,7 +41,8 @@ function MePage() {
 
     return (
         <div className="max-w-sm">
-            <h1 className="font-base mb-10">اطلاعات کاربر</h1>
+            <h1 className="font-bold text-lg mb-4">اطلاعات کاربر</h1>
+            <h2 className="mb-10 block font-bold text-sm">تایید یا ویرایش اصلاعات کاربر</h2>
             <form className="space-y-8" onSubmit={submitHandler}>
                 {Object.keys(includeObj(user , includeKey)).map((key) => {
                     return (
@@ -56,7 +57,7 @@ function MePage() {
                 })}
                 <div>
                     {isUpdating ? (<Loading />) : (
-                        <button className="btn btn--primary w-full"> ویرایش اطلاعات کاربر</button>
+                        <button className="btn btn--primary w-full">تایید</button>
                     )}
                 </div>
             </form>

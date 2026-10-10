@@ -19,3 +19,7 @@ export async function getUserProfileApi() {
 export async function updateProfileApi(data) {
     return http.patch(`/user/update` , data).then(({ data }) => data.data);
 }
+
+export async function logoutApi() {
+    return http.post("/user/logout");
+}
