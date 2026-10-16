@@ -2,6 +2,8 @@ import CategorySidebar from "./[slug]/CategorySidebar";
 import queryString from "query-string";
 import { getProductsApi } from "@/services/productServcice";
 import { getCategoriesApi } from "@/services/categoryService";
+import { toLocalDateStringShort } from "@/utils/toLocalDate";
+import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 async function Products({ searchParams }) {
@@ -22,19 +24,33 @@ async function Products({ searchParams }) {
                 {/* sidebar */}
                 <CategorySidebar categories={categories} />
                 {/* products */}
-                <div className="col-span-3 grid grid-cols-3 gap-4">
-                    {products?.map((product) => {
-                        return (
-                            <div
-                                className="col-span-1 border rounded-xl bg-gray-50 shadow-md p-4"
-                                key={product._id}
-                            >
-                                <h2 className="font-bold text-secondary-600">
-                                    {product.title}
-                                </h2>
-                            </div>
-                        )
-                    })}
+                <div className="col-span-3">
+                    <div className="grid grid-cols-3 gap-4">
+                        {products?.map((product) => {
+                            return (
+                                <div
+                                    className="col-span-1 border rounded-xl bg-gray-50 shadow-md p-4"
+                                    key={product._id}
+                                >
+                                    <h2 className="font-bold text-secondary-600 mb-2">
+                                        {product.title}
+                                    </h2>
+                                    <div className="text-xs font-medium gap-x-1 flex">  
+                                        <span>تاریخ ایجاد :</span>
+                                        <span>
+                                            {toLocalDateStringShort(product.createdAt)}
+                                        </span>
+                                    </div>
+                                    <Link 
+                                        className="font-bold btn--orange"
+                                        href={`/products/${product.slug}`}
+                                    >
+                                        مشاهده محصول
+                                    </Link>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

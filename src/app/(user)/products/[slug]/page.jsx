@@ -1,0 +1,44 @@
+import { getProductBySlugApi, getProductsApi } from "@/services/productServcice";
+export const dynamicParams = false;
+export const dynamic = "force-static"; // for use fetch - SSG
+
+async function page({ params }) {
+    const slug = params.slug;
+    const { product } = await getProductBySlugApi(slug)
+
+    return (
+        <div className="border-2 p-4 w-1/2 block items-center justify-start">
+            <p className="font-bold mb-4">مشخصات محصول</p>
+            <h1 className="font-bold text-2xl mb-6">{product.title}</h1>
+            <p className="mb-6">{product.description}</p>
+            <p className="mb-6">
+                <span>قیمت محصول : </span>
+                <span className={`${product.discount ? "line-through" : "font-bold"}`}>
+                    {product.price} تومان
+                </span>
+            </p>
+            {!!product.discount && (
+                <div className="flex items-center gap-x-2 mb-6">
+                    <p className="text-xl font-bold">
+                        قیمت محصول با تخفیف:  {product.offPrice} تومان
+                    </p>
+                    <div className="bg-rose-500 px-2 py-0.5 rounded-xl text-white text-sm w-28 items-center justify-center flex mt-2">
+                        {product.discount} % تخفیف
+                    </div>
+                </div>
+            )}
+            <div>
+                <button className="btn btn--orange w-full">افزودن به سبد خرید</button>
+            </div>
+        </div>
+    )
+};
+export default page;
+
+export async function generateStaticParams() {
+    const { products } = await getProductsApi();
+
+    return products.map((product) => ({
+        slug: product.slug
+    }));
+}
