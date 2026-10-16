@@ -6,10 +6,15 @@ export const dynamic = "force-dynamic";
 
 async function Products({ searchParams }) {
     const query = queryString.stringify(await searchParams);
-    const { products } = await getProductsApi(query);
-    const { categories } = await getCategoriesApi();
+    // const { products } = await getProductsApi(query);
+    // const { categories } = await getCategoriesApi();
     // console.log(queryString.stringify(searchParams));
-    
+
+    const productsPromise =  getProductsApi(query);
+    const categoryPromise= getCategoriesApi();
+    const [ {products} , {categories} ] = await Promise.all([ productsPromise , categoryPromise ]);
+
+
     return (
         <div>
             <h1 className="text-xl font-base mb-6">صفحه محصولات</h1>
