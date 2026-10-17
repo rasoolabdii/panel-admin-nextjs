@@ -1,9 +1,10 @@
-import CategorySidebar from "./[slug]/CategorySidebar";
+import CategorySidebar from "./CategorySidebar";
 import queryString from "query-string";
 import { getProductsApi } from "@/services/productServcice";
 import { getCategoriesApi } from "@/services/categoryService";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import Link from "next/link";
+import AddToCart from "./[slug]/AddToCart";
 export const dynamic = "force-dynamic";
 
 async function Products({ searchParams }) {
@@ -47,6 +48,7 @@ async function Products({ searchParams }) {
                                     >
                                         مشاهده محصول
                                     </Link>
+                                    <AddToCart product={product} />
                                 </div>
                             )
                         })}

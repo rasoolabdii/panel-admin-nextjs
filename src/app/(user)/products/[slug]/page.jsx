@@ -1,4 +1,5 @@
 import { getProductBySlugApi, getProductsApi } from "@/services/productServcice";
+import AddToCart from "./AddToCart";
 export const dynamicParams = false;
 export const dynamic = "force-static"; // for use fetch - SSG
 
@@ -27,9 +28,7 @@ async function page({ params }) {
                     </div>
                 </div>
             )}
-            <div>
-                <button className="btn btn--orange w-full">افزودن به سبد خرید</button>
-            </div>
+            <AddToCart product={product} />
         </div>
     )
 };
