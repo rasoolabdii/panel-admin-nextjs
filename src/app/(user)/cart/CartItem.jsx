@@ -1,6 +1,7 @@
 "use client";
 
 import { useAddToCart, useDecrementFromCart } from "@/hooks/useCart";
+import toPersianNumbersWithComma from "@/utils/toPersianNumber";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -47,18 +48,20 @@ function CartItem({ cartItem }) {
                     <span
                         className={`${cartItem.discount ? "line-through text-gray-500" : "font-bold"}`}
                     >
-                        {cartItem.price} تومان
+                        {toPersianNumbersWithComma(cartItem.price)} تومان
                     </span>
                 </div>
-                {!!cartItem.discount && (
-                    <div className="flex items-center gap-x-2 mt-2"> 
-                        <p className="font-bold">{cartItem.offPrice} تومان</p>
-                        <div className="bg-rose-500 px-0.5 py-1 rounded-full w-8 h-8 items-center text-center justify-center">
-                            {cartItem.discount}%
+                <div>
+                    {!!cartItem.discount && (
+                        <div className="flex items-center gap-x-2 mt-2"> 
+                            <p className="font-bold">{toPersianNumbersWithComma(cartItem.offPrice)} تومان</p>
+                            <div className="bg-rose-500 px-0.5 py-1 rounded-full w-8 h-8 items-center text-center justify-center">
+                                {toPersianNumbersWithComma(cartItem.discount)}%
+                            </div>
                         </div>
-                    </div>
-                )}
-                <span className="border-r-2 pr-4">تعداد : {cartItem.quantity}</span>
+                    )}
+                </div>
+                <span className="border-r-2 pr-4">تعداد : {toPersianNumbersWithComma(cartItem.quantity)}</span>
                 <div className="flex gap-x-3">
                     <button onClick={addToCartHandler} className="bg-primary-900 text-white rounded p-1">
                         <HiPlus className="w-4 h-4" />
