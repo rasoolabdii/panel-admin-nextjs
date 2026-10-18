@@ -3,10 +3,10 @@
 import useUserProfile from "@/hooks/useUserProfile";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import useAddToCart from "./useAddToCart";
 import Loading from "@/ui/Loading";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useAddToCart } from "@/hooks/useCart";
 
 function AddToCart({ product }) {
     const router = useRouter();
