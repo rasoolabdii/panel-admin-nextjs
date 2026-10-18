@@ -1,7 +1,26 @@
+import usePayment from "@/hooks/usePayment";
+import Loading from "@/ui/Loading";
 import toPersianNumbersWithComma from "@/utils/toPersianNumber";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function CartSummary({ payDetail }) {
     const { totalOffAmount , totalPrice , totalGrossPrice } = payDetail;
+    const { isPending , createPayment } = usePayment();
+    const queryClient = useQueryClient();
+
+    const createPaymentHandler = async () => {
+        try {
+            const { message } = await createPayment();
+            toast.success(message);
+            queryClient.invalidateQueries({
+                queryKey: ["get-user"]
+            })
+        }
+        catch(error) {
+            toast.error(error?.response?.data?.message);
+        }
+    }
 
     return (
         <div className="border p-4 rounded-xl">
@@ -19,7 +38,11 @@ function CartSummary({ payDetail }) {
                 <span>{toPersianNumbersWithComma(totalPrice)} تومان</span>
             </div>
             <div>
-                <button className="btn btn--orange w-full">پرداخت</button>
+                {isPending ? (<Loading />) : (
+                    <div>
+                        <button className="btn btn--orange w-full" onClick={createPaymentHandler}>پرداخت</button>
+                    </div>
+                )}
             </div>
         </div>
     )
