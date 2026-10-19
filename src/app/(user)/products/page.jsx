@@ -5,6 +5,9 @@ import { getCategoriesApi } from "@/services/categoryService";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import Link from "next/link";
 import AddToCart from "./[slug]/AddToCart";
+import LikeProduct from "./LikeProduct";
+import { cookies } from "next/headers";
+import { toStringCookies } from "@/utils/toStringCookies";
 export const dynamic = "force-dynamic";
 
 async function Products({ searchParams }) {
@@ -13,7 +16,9 @@ async function Products({ searchParams }) {
     // const { categories } = await getCategoriesApi();
     // console.log(queryString.stringify(searchParams));
 
-    const productsPromise =  getProductsApi(query);
+    const cookieStore = await cookies();
+    const strCookies = toStringCookies(cookieStore);
+    const productsPromise =  getProductsApi(query , strCookies);
     const categoryPromise= getCategoriesApi();
     const [ {products} , {categories} ] = await Promise.all([ productsPromise , categoryPromise ]);
 
@@ -48,6 +53,7 @@ async function Products({ searchParams }) {
                                     >
                                         مشاهده محصول
                                     </Link>
+                                    <LikeProduct product={product} />
                                     <AddToCart product={product} />
                                 </div>
                             )

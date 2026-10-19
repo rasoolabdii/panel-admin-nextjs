@@ -1,7 +1,7 @@
 import http from "./httpService";
 
-export async function getProductsApi(qs) {
-    return http.get(`/product/list?${qs}`).then(({ data }) => data.data);
+export async function getProductsApi(qs , cookies) {
+    return http.get(`/product/list?${qs}` , { headers: {Cookie: cookies} }).then(({ data }) => data.data);
 };
 
 // export async function getProductsApi(qs) {
@@ -11,4 +11,8 @@ export async function getProductsApi(qs) {
 
 export async function getProductBySlugApi(slug) {
     return http.get(`/product/slug/${slug}`).then(({ data }) => data.data);
+}
+
+export function likeProductApi(id) {
+    return http.post(`/product/like/${id}`).then(({ data}) => data.data);
 }
