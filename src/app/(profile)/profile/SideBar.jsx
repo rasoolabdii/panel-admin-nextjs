@@ -29,6 +29,9 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
+                    <Link href="/profile/payments">سفارشات</Link>
+                </li>
+                <li>
                     <button onClick={logoutHandler}>خروج</button>
                 </li>
             </ul>

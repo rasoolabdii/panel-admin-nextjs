@@ -118,6 +118,12 @@
   .badge--danger {
     @apply bg-red-500 text-white;
   }
+  .table__td {
+    @apply border rounded-xl text-base shadow-lg z-20;
+  }
+  .table__th {
+    @apply border font-medium p-3 pr-8 rounded-lg text-right bg-gray-100 shadow-sm z-10 text-gray-600
+  }
 
   .spinner {
     margin: 3.2rem auto 1.6rem;
