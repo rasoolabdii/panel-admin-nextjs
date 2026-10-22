@@ -16,3 +16,7 @@ export async function getProductBySlugApi(slug) {
 export function likeProductApi(id) {
     return http.post(`/product/like/${id}`).then(({ data}) => data.data);
 }
+
+export function addProductApi(data) {
+    return http.post(`/admin/product/add` , data).then(({ data }) => data.data);
+}

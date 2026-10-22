@@ -22,7 +22,7 @@ function LikeProduct({ product }) {
     }
 
     return (
-        <div>
+        <div className="mt-2">
             <button onClick={likeHandler}>
                 {product.isLiked ? (<AiFillLike className="w-6 h-6" />) : (<AiOutlineLike className="w-6 h-6" />)}
             </button>

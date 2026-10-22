@@ -1,5 +1,5 @@
-import { getProductsApi } from "@/services/productServcice";
-import { useQuery } from "@tanstack/react-query";
+import { addProductApi, getProductsApi } from "@/services/productServcice";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 function useProducts(qs) {
     const {isLoading , data} = useQuery({
@@ -14,3 +14,10 @@ function useProducts(qs) {
     return { isLoading , products };
 };
 export default useProducts;
+
+export const useAddProduct = () => {
+    const { isPending: isCreating , mutateAsync: addProduct } = useMutation({
+        mutationFn: addProductApi
+    });
+    return { isCreating , addProduct };
+};
