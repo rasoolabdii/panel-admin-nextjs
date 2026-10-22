@@ -1,5 +1,5 @@
-import { addProductApi, getProductsApi } from "@/services/productServcice";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { addProductApi, getOneProductByIdApi, getProductsApi, updateProductApi } from "@/services/productServcice";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 function useProducts(qs) {
     const {isLoading , data} = useQuery({
@@ -21,3 +21,23 @@ export const useAddProduct = () => {
     });
     return { isCreating , addProduct };
 };
+
+export const useGetOneProductById = (id) => {
+    const { isLoading , data } = useQuery({
+        queryKey: ["get-product" , id],
+        queryFn: () => getOneProductByIdApi(id),
+        retry: false,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true
+    });
+    const { product } = data || {};
+    return { isLoading , product };
+};
+
+export const useUpdateProduct = () => {
+    const { isPending: isUpdating , mutateAsync: updateProduct } = useMutation({
+        mutationFn: updateProductApi
+    });
+
+    return { isUpdating , updateProduct };
+} 

@@ -20,3 +20,11 @@ export function likeProductApi(id) {
 export function addProductApi(data) {
     return http.post(`/admin/product/add` , data).then(({ data }) => data.data);
 }
+
+export function getOneProductByIdApi(id) {
+    return http.get(`/product/${id}`).then(({ data }) => data.data);
+}
+
+export function updateProductApi({ productId , data }) {
+    return http.patch(`/admin/product/update/${productId}` , data).then(({ data }) => data.data);
+}
