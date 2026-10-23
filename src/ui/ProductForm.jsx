@@ -53,7 +53,9 @@ const productsFormData = [
     },
 ]
 
-function ProductForm({ onSubmit , productDataOnChange , productData , tags , setTags, setSelectedCategory , selectedCategory , options , isLoading }) {
+function ProductForm({ onSubmit ,key, productDataOnChange , productData , tags , setTags, setSelectedCategory , selectedCategory , options , isLoading }) {
+    console.log("tags" , tags); 
+    
     return (
         <div className="max-w-sm">
             <form className="space-y-4" onSubmit={onSubmit}>
@@ -71,8 +73,9 @@ function ProductForm({ onSubmit , productDataOnChange , productData , tags , set
                 <div>
                     <label htmlFor="tags" className="mb-2 block">تگ محصولات</label>
                     <TagsInput
+                        key={key}
                         id="tags"
-                        value={tags}
+                        value={tags ?? []}
                         onChange={setTags}
                         name="tags"
                     />
@@ -81,11 +84,16 @@ function ProductForm({ onSubmit , productDataOnChange , productData , tags , set
                     <label htmlFor="category" className="mb-2 block">دسته بندی</label>
                     <Select
                         instanceId="category"
-                        defaultValue={selectedCategory}
                         options={options}
+                        value={
+                            options?.find(
+                                (option) => option._id === selectedCategory?._id
+                            ) || null
+                        }
                         onChange={(option) => setSelectedCategory(option)}
                         getOptionLabel={(option) => option.title}
                         getOptionValue={(option) => option._id}
+                        defaultValue={selectedCategory}
                         placeholder="انتخاب دسته‌بندی"
                     />
                 </div>

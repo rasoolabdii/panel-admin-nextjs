@@ -94,3 +94,46 @@ export const productListTableTHeads = [
         label: "عملیات"
     }
 ];
+
+export const productDetailsTHead = [
+    {
+        id: 1,
+        label: "#"
+    },
+    {
+        id: 2,
+        label: "عنوان"
+    },
+    {
+        id: 3,
+        label: "توضیحات"
+    },
+    {
+        id: 4,
+        label: "دسته بندی"
+    },
+    {
+        id: 5,
+        label: "اسلاگ"
+    },
+    {
+        id: 6,
+        label: "قیمت"
+    },
+    {
+        id: 7,
+        label: "تخفیف"
+    },
+    {
+        id: 8,
+        label: "قیمت با تخفیف"
+    },
+    {
+        id: 9,
+        label: "برند"
+    },
+    {
+        id: 10,
+        label: "تگ ها"
+    }
+]

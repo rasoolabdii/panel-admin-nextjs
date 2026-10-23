@@ -26,7 +26,7 @@ function page() {
     const { isLoading , product } = useGetOneProductById(id);
     const { categories } = useCategories();
     const router = useRouter();
-    const [tags , setTags] = useState(product?.tags || []);
+    const [tags , setTags] = useState(product?.tags ?? []);
     const [selectedCategory , setSelectedCategory] = useState(null);
     const { isUpdating , updateProduct } = useUpdateProduct();
     const [formData , setFormData] = useState({});
@@ -54,8 +54,8 @@ function page() {
     useEffect(() => {
         if(product) {
             setFormData(includeObj(product , includesProductKey));
-            setTags(product.tags);
             setSelectedCategory(product.category);
+            setTags(product?.tags ?? []);
         }
     } , [product]);
 
@@ -73,6 +73,7 @@ function page() {
                 isLoading={isUpdating}
                 productData={formData}
                 productDataOnChange={handleChange}
+                key={product._id}
             />
         </div>
     )
