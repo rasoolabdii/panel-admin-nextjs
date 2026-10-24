@@ -1,4 +1,4 @@
-import { addNewCategoryApi, getCategoriesApi } from "@/services/categoryService";
+import { addNewCategoryApi, getCategoriesApi, getCategoryByIdApi, updateCategoryApi } from "@/services/categoryService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 function useCategories() {
@@ -21,4 +21,24 @@ export const useAddCategory = () => {
     });
 
     return { isCreating , addCategory };
+};
+
+export const useGetCategoryById = (id) => {
+    const { isLoading , data } = useQuery({
+        queryKey: ["get-category" , id],
+        queryFn: () => getCategoryByIdApi(id),
+        retry: false,
+        refetchOnReconnect: true,
+        refetchOnWindowFocus: true
+    });
+    const {category} = data || {};
+
+    return { isLoading , category };
+};
+
+export const useUpdateCategory = () => {
+    const { isPending: isUpdating , mutateAsync: updateCategory } = useMutation({
+        mutationFn: updateCategoryApi
+    });
+    return { isUpdating , updateCategory };
 };
