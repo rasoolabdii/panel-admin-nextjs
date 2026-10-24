@@ -1,7 +1,6 @@
 import { productListTableTHeads } from "@/utils/tableHeads";
 import toPersianNumbersWithComma, { toPersianNumbers } from "@/utils/toPersianNumber";
 import Link from "next/link";
-import { HiPencil } from "react-icons/hi";
 import { HiEye, HiTrash } from "react-icons/hi2";
 import { RiEdit2Line } from "react-icons/ri";
 

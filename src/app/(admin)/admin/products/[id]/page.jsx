@@ -11,7 +11,6 @@ function page() {
     const { id } = useParams();
     const { product , isLoading} = useGetOneProductById(id);
 
-    console.log("dd" , product);
     if(isLoading) return <Loading />;
     return (
         <div>
