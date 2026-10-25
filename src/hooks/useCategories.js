@@ -1,4 +1,4 @@
-import { addNewCategoryApi, getCategoriesApi, getCategoryByIdApi, updateCategoryApi } from "@/services/categoryService";
+import { addNewCategoryApi, getCategoriesApi, getCategoryByIdApi, removeCategoryApi, updateCategoryApi } from "@/services/categoryService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 function useCategories() {
@@ -42,3 +42,11 @@ export const useUpdateCategory = () => {
     });
     return { isUpdating , updateCategory };
 };
+
+export const useRemoveCategory = () => {
+    const { isPending: isDeleting , mutateAsync: removeCategory } = useMutation({
+        mutationFn: removeCategoryApi
+    });
+
+    return { isDeleting , removeCategory };
+}

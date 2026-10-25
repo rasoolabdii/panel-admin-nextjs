@@ -1,10 +1,29 @@
+import { useRemoveCategory } from "@/hooks/useCategories";
 import { categoryTHead } from "@/utils/tableHeads";
 import truncateText from "@/utils/truncateText";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { HiEye, HiTrash } from "react-icons/hi2";
 import { RiEdit2Line } from "react-icons/ri";
 
 function CategoryListTable({ categories }) {
+    const { removeCategory } = useRemoveCategory();
+    const queryClient = useQueryClient();
+
+    const removeCategoryHandler = async (id) => {
+        try {
+            const { message } = await removeCategory(id);
+            toast.success(message);
+            queryClient.invalidateQueries({
+                queryKey: ["get-categories"]
+            });
+        }
+        catch(error) {
+            toast.error(error?.response?.data?.message);
+        }
+    }
+
     return (
         <div>
             <table>
@@ -35,7 +54,7 @@ function CategoryListTable({ categories }) {
                                             <Link href={`/admin/categories/${category._id}`}>
                                                 <HiEye className="text-primary-900 w-6 h-6" />
                                             </Link>
-                                            <button>
+                                            <button onClick={() => removeCategoryHandler(category._id)}>
                                                 <HiTrash className="text-rose-500 w-6 h-6" />
                                             </button>
                                             <Link href={`/admin/categories/edit/${category._id}`}>
