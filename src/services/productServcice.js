@@ -27,4 +27,8 @@ export function getOneProductByIdApi(id) {
 
 export function updateProductApi({ productId , data }) {
     return http.patch(`/admin/product/update/${productId}` , data).then(({ data }) => data.data);
-}
+};
+
+export function removeProductApi(id) {
+    return http.delete(`/admin/product/remove/${id}`).then(({ data }) => data.data);
+};
