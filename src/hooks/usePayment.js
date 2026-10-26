@@ -1,5 +1,5 @@
-import { createPaymentApi } from "@/services/paymentService";
-import { useMutation } from "@tanstack/react-query";
+import { createPaymentApi, getAllPaymentsApi } from "@/services/paymentService";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 function usePayment() {
     const { isPending , mutateAsync: createPayment } = useMutation({
@@ -9,3 +9,16 @@ function usePayment() {
     return { isPending , createPayment }
 };
 export default usePayment;
+
+export function useGetAllPayments () {
+    const { isLoading , data } = useQuery({
+        queryKey: ["get-payments"],
+        queryFn: getAllPaymentsApi,
+        retry: false,
+        refetchOnReconnect: true,
+        refetchOnWindowFocus: true
+    });
+
+    const { payments } = data || {};
+    return { isLoading , payments }
+}
