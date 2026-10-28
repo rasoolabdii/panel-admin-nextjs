@@ -199,3 +199,38 @@ export const adminPaymentListTableTHeads = [
         label: "وضعیت"
     }
 ]
+
+export const adminCouponTable = [
+    {
+        id: 1,
+        label: "#"
+    },
+    {
+        id: 2,
+        label: "کد تخفیف"
+    },
+    {
+        id: 3,
+        label: "نوع"
+    },
+    {
+        id: 4,
+        label: "مقدار"
+    },
+    {
+        id: 5,
+        label: "شامل محصولات"
+    },
+    {
+        id: 6,
+        label: "مقدار مصرفی"
+    },
+    {
+        id: 7,
+        label: "ظرفیت"
+    },
+    {
+        id: 8,
+        label: "تاریخ انقضاء"
+    }
+]
