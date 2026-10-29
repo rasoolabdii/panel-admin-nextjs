@@ -232,5 +232,9 @@ export const adminCouponTable = [
     {
         id: 8,
         label: "تاریخ انقضاء"
+    },
+    {
+        id: 9,
+        label: "عملیات"
     }
 ]

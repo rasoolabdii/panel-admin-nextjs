@@ -11,8 +11,7 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 
 
-function CouponForm({ onSubmit , handleChange , formData , isLoading, setType , type , setProductIds , expireDate , setExpireDate }) {
-    const { products } = useProducts();
+function CouponForm({ onSubmit , handleChange , options , defaultValue = "" ,  formData , isLoading, setType , type , setProductIds , expireDate , setExpireDate }) {
 
     return (
         <div className="max-w-sm">
@@ -20,19 +19,19 @@ function CouponForm({ onSubmit , handleChange , formData , isLoading, setType , 
                 <TextField 
                     label="کد"
                     name="code"
-                    value={FormData.code}
-                    onChange={handleChange}
+                    value={formData.code || ""}
+                    onChange={handleChange} 
                 />
                 <TextField 
                     label="مقدار"
                     name="amount"
-                    value={formData.amount}
+                    value={formData.amount || ""}
                     onChange={handleChange}
                 />
                 <TextField 
                     label="ظرفیت"
                     name="usageLimit"
-                    value={formData.usageLimit}
+                    value={formData.usageLimit || ""}
                     onChange={handleChange}
                 />
                 <div>
@@ -66,7 +65,8 @@ function CouponForm({ onSubmit , handleChange , formData , isLoading, setType , 
                         onChange={setProductIds}
                         getOptionLabel={(option) => option.title}
                         getOptionValue={(option) => option._id}
-                        options={products}
+                        options={options}
+                        defaultValue={defaultValue}
                     />
                 </div>
                 <div>

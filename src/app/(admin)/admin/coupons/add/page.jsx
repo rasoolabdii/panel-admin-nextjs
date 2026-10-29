@@ -1,6 +1,7 @@
 "use client";
 
 import { useCreateCoupon } from "@/hooks/useCoupons";
+import useProducts from "@/hooks/useProducts";
 import CouponForm from "@/ui/CouponForm";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,6 +19,8 @@ function page() {
         usageLimit: ""
     });
     const router = useRouter();
+    const { products } = useProducts();
+
 
     const handleChange = (e) => {
         setFormData({...formData , [e.target.name]: e.target.value});
@@ -54,6 +57,7 @@ function page() {
                 setProductIds={setProductIds}
                 expireDate={expireDate}
                 setExpireDate={setExpireDate}
+                options={products}
             />
         </div>
     )

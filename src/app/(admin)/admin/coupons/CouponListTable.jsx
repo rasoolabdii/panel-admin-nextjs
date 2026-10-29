@@ -3,8 +3,13 @@
 import { adminCouponTable } from "@/utils/tableHeads";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import toPersianNumbersWithComma, { toPersianNumbers } from "@/utils/toPersianNumber";
+import Link from "next/link";
+import { HiEye, HiTrash } from "react-icons/hi2";
+import { RiEdit2Line } from "react-icons/ri";
 
 function CouponListTable({ coupons = [] }) {
+
+
     return (
         <div className="shadow-md overflow-auto my-8">
             <table className="border-collapse table_auto w-full min-w-[800px] text-sm">
@@ -22,8 +27,8 @@ function CouponListTable({ coupons = [] }) {
                 <tbody className="table__td">
                     {coupons.map((coupon , index) => {
                         return (
-                            <tr>
-                                <td>{ index + 1 }</td>
+                            <tr key={coupon._id}>
+                                <td>{index + 1}</td>
                                 <td>{coupon.code}</td>
                                 <td>
                                     <span className="badge badge--success">{coupon.type}</span>
@@ -49,6 +54,19 @@ function CouponListTable({ coupons = [] }) {
                                 <td>{toPersianNumbers(coupon.usageCount)}</td>
                                 <td>{toPersianNumbers(coupon.usageLimit)}</td>
                                 <td>{toLocalDateStringShort(coupon.expireDate)}</td>
+                                <td className="font-bold">
+                                    <div className="flex items-center gap-x-4">
+                                        <Link href={`/admin/coupons/${coupon._id}`}>
+                                            <HiEye className="text-primary-900 w-6 h-6" />
+                                        </Link>
+                                        <button>
+                                            <HiTrash className="w-6 h-6 text-rose-600" />
+                                        </button>
+                                        <Link href={`/admin/coupons/edit/${coupon._id}`}>
+                                            <RiEdit2Line className="w-6 h-6 text-secondary-600" />
+                                        </Link>
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}

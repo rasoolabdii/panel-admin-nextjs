@@ -1,4 +1,4 @@
-import { createNewCouponApi, getAllCouponsApi } from "@/services/couponService";
+import { createNewCouponApi, getAllCouponsApi, getOneCouponApi, updateCouponApi } from "@/services/couponService";
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useCreateCoupon = () => {
@@ -20,3 +20,23 @@ export const useGetAllCoupons = () => {
     const { coupons } = data || {};
     return { isLoading , coupons };
 };
+
+export const useGetOneCoupon = (id) => {
+    const { isLoading , data } = useQuery({
+        queryKey: ["get-coupon" , id],
+        queryFn: () => getOneCouponApi(id),
+        retry: false,
+        refetchOnReconnect: true,
+        refetchOnWindowFocus: true
+    });
+    const { coupon } = data || {};
+    return { isLoading , coupon };
+};
+
+export const useUpdateCoupon = () => {
+    const { isPending: isUpdating , mutateAsync: updateCoupon } = useMutation({
+        mutationFn: updateCouponApi
+    });
+
+    return { isUpdating , updateCoupon };
+}
