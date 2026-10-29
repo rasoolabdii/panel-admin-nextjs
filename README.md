@@ -26,9 +26,13 @@ http://localhost:5000/api
 Interactive API documentation is available :
 
 URL UI:
+
 http://localhost:3000/
+
 http://localhost:3000/admin
+
 http://localhost:3000/profile
+
 http://localhost:3000/products
 
 ⚙️ Environment Variables
