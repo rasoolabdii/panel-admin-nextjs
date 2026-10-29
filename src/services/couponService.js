@@ -15,3 +15,7 @@ export function getOneCouponApi(id) {
 export function updateCouponApi({ id , data }) {
     return http.patch(`/admin/coupon/update/${id}` , data).then(({ data }) => data.data);
 }
+
+export function removeCouponApi(id) {
+    return http.delete(`/admin/coupon/remove/${id}`).then(({ data }) => data.data);
+};

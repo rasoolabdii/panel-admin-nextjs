@@ -1,14 +1,28 @@
 "use client";
 
+import { useRemoveCoupon } from "@/hooks/useCoupons";
 import { adminCouponTable } from "@/utils/tableHeads";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import toPersianNumbersWithComma, { toPersianNumbers } from "@/utils/toPersianNumber";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { HiEye, HiTrash } from "react-icons/hi2";
 import { RiEdit2Line } from "react-icons/ri";
 
 function CouponListTable({ coupons = [] }) {
-
+    const { isDeleting , removeCoupon } = useRemoveCoupon();
+    const queryClient = useQueryClient();
+    const handleDeleteCoupon = async (id) => {
+        try {
+            const { message } = await removeCoupon(id);
+            toast.success(message);
+            queryClient.invalidateQueries({queryKey: ['get-coupons']});
+        }
+        catch(error) {
+            toast.error(error?.response?.data?.message);
+        }
+    }
 
     return (
         <div className="shadow-md overflow-auto my-8">
@@ -59,7 +73,7 @@ function CouponListTable({ coupons = [] }) {
                                         <Link href={`/admin/coupons/${coupon._id}`}>
                                             <HiEye className="text-primary-900 w-6 h-6" />
                                         </Link>
-                                        <button>
+                                        <button onClick={() => handleDeleteCoupon(coupon._id)}>
                                             <HiTrash className="w-6 h-6 text-rose-600" />
                                         </button>
                                         <Link href={`/admin/coupons/edit/${coupon._id}`}>

@@ -1,4 +1,4 @@
-import { createNewCouponApi, getAllCouponsApi, getOneCouponApi, updateCouponApi } from "@/services/couponService";
+import { createNewCouponApi, getAllCouponsApi, getOneCouponApi, removeCouponApi, updateCouponApi } from "@/services/couponService";
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useCreateCoupon = () => {
@@ -39,4 +39,12 @@ export const useUpdateCoupon = () => {
     });
 
     return { isUpdating , updateCoupon };
+}
+
+export const useRemoveCoupon = () => {
+    const { isPending: isDeleting , mutateAsync: removeCoupon } = useMutation({
+        mutationFn: removeCouponApi
+    });
+
+    return { isDeleting , removeCoupon };
 }
